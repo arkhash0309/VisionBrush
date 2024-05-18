@@ -247,7 +247,3 @@ capture_device.release()
 
 # all the windows are closed
 cv2.destroyAllWindows()
-    
-
-
-
