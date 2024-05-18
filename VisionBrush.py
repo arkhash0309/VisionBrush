@@ -186,5 +186,68 @@ while bool:
         elif 490 <= center[0] <= 580:
             colorIndex = 3 # yellow color
     
+        else: 
+            # if the color index is 0, the blue points are appended to the dequeues
+            if colorIndex == 0:
+                blue_points[blue_index].appendleft(center)
+
+            # if the color index is 1, the green points are appended to the dequeues
+            elif colorIndex == 1:
+                green_points[green_index].appendleft(center)
+
+            # if the color index is 2, the red points are appended to the dequeues
+            elif colorIndex == 2:
+                red_points[red_index].appendleft(center)
+
+            # if the color index is 3, the yellow points are appended to the dequeues
+            elif colorIndex == 3:
+                yellow_points[yellow_index].appendleft(center)
+
+    # the next dequeues are appended when nothing is detected
+    else:
+        # the blue points are appended to the dequeues
+        blue_points.append(deque(maxlen=512))
+        blue_index += 1
+    
+        # the green points are appended to the dequeues
+        green_points.append(deque(maxlen=512))
+        green_index += 1
+    
+        # the red points are appended to the dequeues
+        red_points.append(deque(maxlen=512))
+        red_index += 1
+    
+        # the yellow points are appended to the dequeues
+        yellow_points.append(deque(maxlen=512))
+        yellow_index += 1
+    
+    # the lines of all the colors are drawn on the canvas and the frame
+    points = [blue_points, green_points, red_points, yellow_points]
+
+    for i in range(len(points)):
+        for j in range(len(points[i])):
+            for k in range(1, len(points[i][j])):
+                if points[i][j][k - 1] is None or points[i][j][k] is None:
+                    continue
+                cv2.line(screen_frame, points[i][j][k - 1], points[i][j][k], colors[i], 2)
+                cv2.line(paint_box, points[i][j][k - 1], points[i][j][k], colors[i], 2)
+
+    # the frame is displayed
+    cv2.imshow("Frame", screen_frame)
+
+    # the canvas is displayed
+    cv2.imshow("Canvas", paint_box)
+
+    # if the key 'z' is pressed, the loop breaks
+    if cv2.waitKey(1) == ord('z'):
+        break
+
+# the webcam is stopeed 
+capture_device.release()
+
+# all the windows are closed
+cv2.destroyAllWindows()
+    
+
 
 
