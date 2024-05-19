@@ -39,5 +39,8 @@ This project makes use of computer vision techniques which keep track of the mov
 <ul>opencv-python -> 4.9.0.80</ul>
 <ul>mediapipe -> 0.10.14</ul>
 
+## Contribution
+Feel free to fork or put up a branch on this project to provide contributions.
+
 ## License
 This project is governed by the MIT License.
